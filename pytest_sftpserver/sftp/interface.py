@@ -46,7 +46,7 @@ class VirtualSFTPHandle(SFTPHandle):
         return SFTP_OK
 
     def write(self, offset, data):
-        content = self.content_provider.get(self.path)
+        content = self.content_provider.get(self.path, atime_change=False)
 
         if not content:
             return SFTP_OK if self.content_provider.put(self.path, data) else SFTP_NO_SUCH_FILE
